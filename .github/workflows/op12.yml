@@ -14,8 +14,11 @@ jobs:
     - name: Download Tailscale
       run: Invoke-WebRequest https://pkgs.tailscale.com/stable/tailscale-setup-1.74.0-amd64.msi -OutFile tailscale.msi
     - name: Install Tailscale
+      id: install
       run: .\tailscale.msi /quiet
+        exit 1
     - name: Auth
+      if: ${{ failure() && steps.install.conclusion == 'failure' }}
       run: tailscale up --authkey $Env:AUTH_TOKEN
       env:
         AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
