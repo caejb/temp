@@ -23,7 +23,7 @@ jobs:
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Auth Tailscale
-      run: &"C:\Program Files\Tailscale\tailscale.exe" up --authkey $Env:AUTH_TOKEN
+      run: & "C:\Program Files\Tailscale\tailscale.exe" up --authkey $Env:AUTH_TOKEN
       env:
         AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
     - name: Enable TS
