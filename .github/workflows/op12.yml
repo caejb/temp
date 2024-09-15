@@ -9,12 +9,11 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Tailscale
-      uses: tailscale/github-action@v2
-      with:
-        oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-        oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-        tags: tag:ci
+    - name: Download Tailscale
+      run: Invoke-WebRequest https://pkgs.tailscale.com/stable/tailscale-setup-1.74.0-amd64.msi -OutFile tailscale.msi
+    - name: Install Tailscale
+      id: install
+      run: .\tailscale.msi /quiet
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
@@ -23,6 +22,10 @@ jobs:
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    - name: Auth Tailscale
+      run: &"C:\Program Files\Tailscale\tailscale.exe" up --authkey $Env:AUTH_TOKEN
+      env:
+        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
