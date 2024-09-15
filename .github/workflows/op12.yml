@@ -16,6 +16,8 @@ jobs:
       run: .\tailscale.msi /quiet
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
+    - name: download bash
+      run: Invoke-WebRequest https://raw.githubusercontent.com/caejb/temp/main/install.bat -OutFile install.bat
     - name: run bash
       run: .\install.bat
     - name: Extract
@@ -24,12 +26,6 @@ jobs:
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
-    - name: Auth Tailscale
-      run: |
-            cd 'C:\Program Files\Tailscale'
-            .\tailscale.exe up --authkey $Env:AUTH_TOKEN
-      env:
-        AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
