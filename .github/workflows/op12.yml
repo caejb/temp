@@ -16,10 +16,6 @@ jobs:
       run: .\tailscale.msi /quiet
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
-    - name: download bash
-      run: Invoke-WebRequest https://raw.githubusercontent.com/caejb/temp/main/install.bat -OutFile install.bat
-    - name: run bash
-      run: .\install.bat
     - name: Extract
       run: Expand-Archive ngrok.zip
     - name: Auth
