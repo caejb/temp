@@ -16,9 +16,8 @@ jobs:
     - name: Install Tailscale
       id: install
       run: .\tailscale.msi /quiet
-        exit 1
     - name: Auth
-      if: ${{ failure() && steps.install.conclusion == 'failure' }}
+      if: ${{ success() && steps.install.conclusion == 'success' }}
       run: tailscale up --authkey $Env:AUTH_TOKEN
       env:
         AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
