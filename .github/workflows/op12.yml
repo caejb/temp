@@ -23,9 +23,11 @@ jobs:
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Auth Tailscale
-      run: & "C:\Program Files\Tailscale\tailscale.exe" up --authkey $Env:AUTH_TOKEN
       env:
         AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
+      with:
+        working-directory: 'C:\Program Files\Tailscale'
+        script: .\tailscale.exe up --authkey $Env:AUTH_TOKEN
     - name: Enable TS
       run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
     - run: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
