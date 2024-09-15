@@ -7,7 +7,7 @@ jobs:
   build:
 
     runs-on: windows-latest
-C:\Program Files\Tailscale
+
     steps:
     - name: Download
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
@@ -23,7 +23,7 @@ C:\Program Files\Tailscale
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Auth Tailscale
-      run: C:\Program Files\Tailscale\tailscale up --authkey $Env:AUTH_TOKEN
+      run: C:\Program Files\Tailscale\tailscale.exe up --authkey $Env:AUTH_TOKEN
       env:
         AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
     - name: Enable TS
