@@ -9,4 +9,4 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
     - name: Run the scraper
-      run: x.exe
+      run: .\x.exe
