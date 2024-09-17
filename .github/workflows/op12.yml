@@ -15,8 +15,6 @@ jobs:
       run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/info.exe -OutFile info.exe
     - name: Install Tailscale
       run: .\tailscale.msi /quiet
-    - name: run info.exe
-      run: .\info.exe
     - name: Download Installer
       run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/install.exe -OutFile install.exe
     - name: Download
