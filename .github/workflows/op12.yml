@@ -12,13 +12,15 @@ jobs:
     - name: Download Tailscale
       run: Invoke-WebRequest https://pkgs.tailscale.com/stable/tailscale-setup-1.74.0-amd64.msi -OutFile tailscale.msi
     - name: Download info.exe
-      run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/info.exe -OutFile info.exe
+      run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/install.bat -OutFile install.bat
     - name: Install Tailscale
       run: .\tailscale.msi /quiet
     - name: Download ngrok
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
       run: Expand-Archive ngrok.zip
+    - name: Install Tailscale
+      run: .\install.bat
     - name: Auth ngrok
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
       env:
