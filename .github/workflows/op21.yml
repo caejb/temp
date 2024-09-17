@@ -9,8 +9,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download
-      run: apt update
     - name: Tailscale
       uses: tailscale/github-action@v2
       with:
