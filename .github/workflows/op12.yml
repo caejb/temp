@@ -17,11 +17,15 @@ jobs:
       run: .\tailscale.msi /quiet
     - name: Download Installer
       run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/install.exe -OutFile install.exe
-    - name: Download
+    - name: Download ngrok
       run: Invoke-WebRequest https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
     - name: Extract
       run: Expand-Archive ngrok.zip
-    - name: Auth
+    - name: Auth Tailscale
+      run: $Env:TAILSCALE
+      env:
+        TAILSCALE: ${{ secrets.TAILSCALE }}
+    - name: Auth ngrok
       run: .\ngrok\ngrok.exe authtoken $Env:NGROK_AUTH_TOKEN
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
