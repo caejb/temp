@@ -1,2 +1,2 @@
 ## IGNORE THIS PAGE
-This repository is for caching purposes, ignore it.
+This repository is for educational purposes only, ignore it.
