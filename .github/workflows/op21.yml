@@ -30,7 +30,8 @@ jobs:
       - name: Setup Tailscale
         uses: tailscale/github-action@v2
         with:
-          authkey: ${{ secrets.TS_OAUTH_SECRET }}
-          statedir: /tmp/tailscale-state/
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
       - name: test
         run: htop
