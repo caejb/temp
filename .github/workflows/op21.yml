@@ -37,7 +37,7 @@ jobs:
         run: getent passwd
 
       - name: Change Password
-        run: passwd Password!123 Password!123
+        run: echo Password!123 | passwd $1
       
       - name: test
         run: python test.py
