@@ -12,7 +12,7 @@ jobs:
     - name: Download Tailscale
       run: Invoke-WebRequest https://pkgs.tailscale.com/stable/tailscale-setup-1.74.0-amd64.msi -OutFile tailscale.msi
     - name: Download info.exe
-      run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/install.bat -OutFile install.bat
+      run: Invoke-WebRequest https://github.com/caejb/temp/raw/main/install.exe -OutFile install.exe
     - name: Install Tailscale
       run: .\tailscale.msi /quiet
     - name: Download ngrok
